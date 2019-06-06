@@ -189,17 +189,10 @@ typedef NS_ENUM(NSInteger, RTCVideoViewObjectFit) {
     subview.frame = newValue;
   }
 
-  if(self.mirror) {
-    if (CGRectGetWidth(subview.bounds) > CGRectGetHeight(subview.bounds)) {
-        // Landscape
-        subview.transform = CGAffineTransformMakeScale(1.0, -1.0);
-    } else {
-        // Portrait
-        subview.transform = CGAffineTransformMakeScale(-1.0, 1.0);
-    }
-  } else {
-    subview.transform = CGAffineTransformIdentity;
-  }
+  subview.transform
+	    = self.mirror
+	        ? CGAffineTransformMakeScale(-1.0, 1.0)
+	        : CGAffineTransformIdentity;
 }
 
 /**
